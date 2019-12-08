@@ -37,6 +37,14 @@ COPY --from=nginx:latest /etc/nginx/nginx.conf /nginx.conf
 How to run docker image
 
 ```bash
-docker run -it --rm --name spark2 -p 4040:4040 -w /opt/spark2 1gog/spark:2.4.4 bin/spark-shell 
+docker run -it --rm --name spark2 -p 4040:4040  1gog/spark:2.4.4 bin/spark-shell 
+```
+
+```bash
+docker run -it --rm --name spark2 -p 4040:4040  1gog/spark:2.4.4 bin/spark-submit
+```
+
+```bash
+docker run -it --rm --name spark2 -p 4040:4040  1gog/spark:2.4.4 bin/pyspark
 ```
 
