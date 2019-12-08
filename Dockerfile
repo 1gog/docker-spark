@@ -1,5 +1,12 @@
 FROM centos:7
+RUN yum install -y epel-release curl wget bzip2
+WORKDIR /opt
+RUN wget http://mirror.linux-ia64.org/apache/spark/spark-2.4.4/spark-2.4.4-bin-hadoop2.6.tgz
+RUN tar xzf spark-2.4.4-bin-hadoop2.6.tgz -C /opt/
 
-RUN yum install -y epel-release && yum install -y vim wget curl java-1.8.0-openjdk.x86_64 && yum clean all -y 
-RUN cd /opt/ && wget http://apache-mirror.rbc.ru/pub/apache/spark/spark-2.4.3/spark-2.4.3-bin-hadoop2.7.tgz && tar xzf spark-2.4.3-bin-hadoop2.7.tgz && mv spark-2.4.3-bin-hadoop2.7 spark && rm -f /opt/spark-2.4.3-bin-hadoop2.7.tgz
-ENV PATH=$PATH:/opt/spark/bin
+
+FROM centos:7
+RUN yum install -y epel-release
+RUN yum install -y java-1.8.0-openjdk && mkdir -p /opt/spark-2.4.4 && ln -s /opt/spark-2.4.4 /opt/spark2
+COPY --from=0 /opt/spark-2.4.4-bin-hadoop2.6/ /opt/spark2/
+CMD [ "/bin/bash" ]
