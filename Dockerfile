@@ -9,5 +9,5 @@ FROM centos:7
 RUN yum install -y epel-release
 RUN yum install -y java-1.8.0-openjdk && mkdir -p /opt/spark-2.4.5 && ln -s /opt/spark-2.4.5 /opt/spark2
 COPY --from=0 /opt/spark-2.4.5-bin-hadoop2.7/ /opt/spark2/
-WORKDIR /opt/spark2
-CMD [ "/sbin/start-master.sh"]
+WORKDIR /opt/spark-2.4.5
+CMD [ "sbin/start-master.sh"]
